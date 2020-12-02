@@ -4,6 +4,7 @@ with open('./01.txt') as myinput:
     inputlines = myinput.readlines()
 
 #Part 1
+
 solution = False
 for i in inputlines:
     for j in inputlines:
@@ -15,6 +16,7 @@ for i in inputlines:
         break
 
 #Part 2
+
 solution = False
 for i in inputlines:
     for j in inputlines:
