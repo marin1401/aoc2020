@@ -1,24 +1,26 @@
 program day01
   
   integer input(200)
-  integer sum,mul
+  integer dim,sum,mul
   
   !Read input
   
   open(10, file="01.txt")
   
-  do i = 1,size(input)
+  dim = size(input)
+  
+  do i = 1,dim
     read(10,*) input(i)
   end do
   
   !Part 1
   
-  outer: do i = 1,size(input)
-    do j = 1,size(input)
-      sum = input(i)+input(j)
+  outer: do i = 1,dim
+    do j = 1,dim
+      sum = input(i) + input(j)
       if(sum.eq.2020) then
-        mul = input(i)*input(j)
-        print *,mul
+        mul = input(i) * input(j)
+        print *, mul
         exit outer
       end if
     end do
@@ -26,13 +28,13 @@ program day01
   
   !Part 2
   
-  do i = 1,size(input)
-    do j = 1,size(input)
-      do k = 1,size(input)
-        sum = input(i)+input(j)+input(k)
+  do i = 1,dim
+    do j = 1,dim
+      do k = 1,dim
+        sum = input(i) + input(j) + input(k)
         if(sum.eq.2020) then
-          mul = input(i)*input(j)*input(k)
-          print *,mul
+          mul = input(i) * input(j) * input(k)
+          print *, mul
           stop
         end if
       end do
