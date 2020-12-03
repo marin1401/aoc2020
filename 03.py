@@ -14,7 +14,7 @@ for slope in slopes:
     position = 0
     counter = 0
     if slope[1] > 1:
-        del toboggan[1::slope[1]]
+        del toboggan[1::slope[1]] #this is wrong, but simple
     for row in toboggan:
         if position < len(row) - slope[0]:
             if row[position] == 1:
@@ -27,6 +27,9 @@ for slope in slopes:
         position += slope[0]
     trees.append(counter)
     trees_product = trees_product * counter
-    
+
+#Part 1
 print(trees[1])
+
+#Part 2
 print(trees_product)
