@@ -6,28 +6,27 @@ with open('./03.txt') as myinput:
 inputlines = [line.replace('.', '0').replace('#', '1').replace('\n', '') for line in inputlines]
 toboggan = [list(map(int, i)) for i in inputlines]
 
-position = 0
-counter = 0
-for row in toboggan:
-    if position < len(row)-3:
-        if row[position] == 1:
-            counter += 1
-    elif position == len(row)-3:
-        if row[position] == 1:
-            counter += 1
-        position = -3
-    elif position == len(row)-2:
-        if row[position] == 1:
-            counter += 1
-        position = -2
-    elif position == len(row)-1:
-        if row[position] == 1:
-            counter += 1
-        position = -1
-    elif position == len(row):
-        if row[position] == 1:
-            counter += 1
-        position = 0
-    position += 3
+slopes = [[1, 1], [3, 1], [5, 1], [7, 1], [1, 2]]
+trees = []
+trees_product = 1
 
-print(counter)
+for slope in slopes:
+    position = 0
+    counter = 0
+    if slope[1] > 1:
+        del toboggan[1::slope[1]]
+    for row in toboggan:
+        if position < len(row) - slope[0]:
+            if row[position] == 1:
+                counter += 1
+        for i in range(slope[0] + 1):
+            if position == len(row) - i:
+                if row[position] == 1:
+                    counter += 1
+                position = -i
+        position += slope[0]
+    trees.append(counter)
+    trees_product = trees_product * counter
+    
+print(trees[1])
+print(trees_product)
