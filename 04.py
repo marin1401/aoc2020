@@ -26,3 +26,6 @@ for passport in passports:
 
 #Part 1
 print(counter)
+
+#Part 2
+#I refuse to do this because there are only 2718281828459045 conditions to check and imo there should be more
