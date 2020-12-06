@@ -25,6 +25,7 @@ for seat in seats:
 print(max(seat_IDs))
 
 #Part 2
+
 for my_seat_ID in range(min(seat_IDs), max(seat_IDs)):
     if my_seat_ID not in seat_IDs:
         print(my_seat_ID)
