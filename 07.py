@@ -13,19 +13,17 @@ for key, vals in bags.items():
     if 'shiny gold' in vals:
         bags_which_hold_directly.add(key)
 
-bags_to_check_later = set()
-
-counter = len(bags_which_hold_directly)
-
-def bag_counter(bags, bags_to_check_first, bags_to_check_later, counter):
+def bag_counter(bags, bags_to_check_first, bags_to_check_later, checked_bags):
     for keys, vals in bags.items():
         for bag in bags_to_check_first:
             if bag in vals:
                 bags_to_check_later.add(keys)
-    counter += len(bags_to_check_later)
+    checked_bags.update(bags_to_check_first)
     if len(bags_to_check_later) != 0: 
-        return bag_counter(bags, bags_to_check_later, set(), counter)
+        return bag_counter(bags, bags_to_check_later, set(), checked_bags)
     else:
-        return counter
+        return len(checked_bags)
 
-print(bag_counter(bags, bags_which_hold_directly, bags_to_check_later, len(bags_which_hold_directly)))
+#Part 1
+        
+print(bag_counter(bags, bags_which_hold_directly, set(), set()))
