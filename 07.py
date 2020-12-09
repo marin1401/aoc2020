@@ -31,9 +31,10 @@ print(bag_counter(bags, bags_which_hold_directly, set(), set()))
 
 #Part 2
 
-#NOTE:
-#Had a lot of trouble getting this part to work.
-#For an easy recursive solution, dict needs to be written in a different way:
+# NOTE:
+# Had a lot of trouble getting this part to work.
+# Did a recursion with the dict above, but couldn't get counter to add properly.
+# For an easy recursive solution, dict needs to be written in a different way:
 
 new_bags_dict = {}
 for keys, vals in bags.items():
