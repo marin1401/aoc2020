@@ -27,9 +27,16 @@ print(count_diff_1 * count_diff_3)
 # For this part I exploited the fact that there aren't more than 5 consecutive adapters
 # and that there are always 2 jolts in between consecutive adapter groups
 
-import more_itertools as mit
-
-groups = [list(group) for group in mit.consecutive_groups(num_list)]
+groups = []
+group = []
+num_check = 0
+for num in num_list:
+    if num_check + 1 != num:
+        if group:
+            groups.append(group)
+            group = []
+    group.append(num)
+    num_check = num
 
 arrangements = 1
 for group in groups:
