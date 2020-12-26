@@ -3,27 +3,20 @@
 with open('./01.txt') as myinput:
     inputlines = myinput.readlines()
 
+entries = [int(i) for i in inputlines]
+entries_len = len(entries)
+
 #Part 1
 
-solution = False
-for i in inputlines:
-    for j in inputlines:
-        if int(i)+int(j) == 2020:
-            print(int(i)*int(j))
-            solution = True
-            break
-    if solution == True:
-        break
+for i in range(entries_len):
+    for j in range(i, entries_len):
+        if entries[i] + entries[j] == 2020:
+            print(entries[i] * entries[j])
 
 #Part 2
 
-solution = False
-for i in inputlines:
-    for j in inputlines:
-        for k in inputlines:
-            if int(i)+int(j)+int(k) == 2020:
-                print(int(i)*int(j)*int(k))
-                solution = True
-                break
-        if solution == True:
-            break
+for i in range(entries_len):
+    for j in range(i, entries_len):
+        for k in range(j, entries_len):
+            if entries[i] + entries[j] + entries[k] == 2020:
+                print(entries[i] * entries[j] * entries[k])
