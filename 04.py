@@ -30,10 +30,10 @@ valid_ecl = ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']
 
 counter = 0
 for passport in passports:
-    if int(passport['byr']) in range(1919, 2003):
-        if int(passport['iyr']) in range(2009, 2021):
-            if int(passport['eyr']) in range(2019, 2031):
-                if passport['hgt'][-2:] == 'cm' and int(passport['hgt'][:-2]) in range(149, 194) or passport['hgt'][-2:] == 'in' and int(passport['hgt'][:-2]) in range(58, 77):
+    if int(passport['byr']) in range(1920, 2003):
+        if int(passport['iyr']) in range(2010, 2021):
+            if int(passport['eyr']) in range(2020, 2031):
+                if passport['hgt'][-2:] == 'cm' and int(passport['hgt'][:-2]) in range(150, 194) or passport['hgt'][-2:] == 'in' and int(passport['hgt'][:-2]) in range(59, 77):
                     if passport['hcl'][0] == '#' and len(passport['hcl']) == 7 and all(chars in valid_chars for chars in passport['hcl'][1:]):
                         if passport['ecl'] in valid_ecl:
                             if len(passport['pid']) == 9:
