@@ -6,11 +6,11 @@ with open('./05.txt') as myinput:
 seats = [line.strip() for line in inputlines]
 
 def seat_finder(seat, min_value, max_value, direction):
-    value_sum_plus_1 = max_value + min_value + 1
+    value_sum = max_value + min_value
     if seat[0] == direction[0]:
-        max_value = value_sum_plus_1 // 2 - 1
+        max_value = value_sum // 2
     elif seat[0] == direction[1]:
-        min_value = value_sum_plus_1 // 2
+        min_value = value_sum // 2 + 1
     if min_value != max_value:
         return seat_finder(seat[1:], min_value, max_value, direction)
     else:
@@ -18,14 +18,10 @@ def seat_finder(seat, min_value, max_value, direction):
 
 #Part 1
         
-seat_IDs = set()
-for seat in seats:
-    seat_IDs.add(seat_finder(seat[:-3], 0, 127, 'FB') * 8 + seat_finder(seat[7:], 0, 7, 'LR'))
+seat_IDs = set(seat_finder(seat[:-3], 0, 127, 'FB') * 8 + seat_finder(seat[7:], 0, 7, 'LR') for seat in seats)
 
 print(max(seat_IDs))
 
 #Part 2
 
-for my_seat_ID in range(min(seat_IDs), max(seat_IDs)):
-    if my_seat_ID not in seat_IDs:
-        print(my_seat_ID)
+print(next(my_seat_ID for my_seat_ID in range(min(seat_IDs), max(seat_IDs)) if my_seat_ID not in seat_IDs))
