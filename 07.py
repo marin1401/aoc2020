@@ -4,49 +4,38 @@ with open('./07.txt') as myinput:
     inputlines = myinput.readlines()
 
 bags = {}
-new_bags = {}
 for line in inputlines:
-    key, vals = line.split(' bags contain ')
-    bags[key] = vals.replace('\n', '').replace(' bags', '').replace(' bag', '').replace('no other', '').replace('.', '')
-
-bags_which_hold_directly = set()
-for key, vals in bags.items():
-    if 'shiny gold' in vals:
-        bags_which_hold_directly.add(key)
-
-def bag_counter(bags, bags_to_check_first, bags_to_check_later, checked_bags):
-    for keys, vals in bags.items():
-        for bag in bags_to_check_first:
-            if bag in vals:
-                bags_to_check_later.add(keys)
-    checked_bags.update(bags_to_check_first)
-    if len(bags_to_check_later) != 0: 
-        return bag_counter(bags, bags_to_check_later, set(), checked_bags)
-    else:
-        return len(checked_bags)
+    bag = ' '.join(line.split()[:2])
+    contain = line.split()[4:]
+    bags_inside = []
+    for i in range(0, len(contain), 4):
+        if contain[i].isdigit():
+            bags_inside.append((int(contain[i]), ' '.join(contain[i+1:i+3])))
+    bags[bag] = bags_inside
 
 #Part 1
-        
-print(bag_counter(bags, bags_which_hold_directly, set(), set()))
+
+def find_bags_which_can_contain():
+    for bag, containing_bags in bags.items():
+        if bag not in bags_which_can_contain:
+            for every_bag in containing_bags:
+                if every_bag[1] in bags_which_can_contain:
+                    bags_which_can_contain.append(bag)
+                    return find_bags_which_can_contain()
+    return None
+
+bags_which_can_contain = ['shiny gold']
+
+find_bags_which_can_contain()
+
+print(len(bags_which_can_contain) - 1)
 
 #Part 2
 
-# NOTE:
-# Had a lot of trouble getting this part to work.
-# Did a recursion with the dict above, but couldn't get the counter to add properly.
-# For an easy recursive solution, dict needs to be written in a different way:
-
-new_bags_dict = {}
-for keys, vals in bags.items():
-    vals_list = [line for line in vals.split(', ')]
-    bags = [' '.join(line.split()[-2:]) for line in vals_list]
-    num = [line[0] for line in vals_list if len(line) != 0]
-    new_bags_dict[keys] = [(int(num[i]), bags[i]) for i in range(len(bags)) if len(num) != 0]
-
-def yo_dawg(the_bag):
+def count_all_other_bags_inside(the_bag):
     counter = 0
-    for bag in new_bags_dict[the_bag]:
-        counter += bag[0] * (1 + yo_dawg(bag[1]))
+    for bag in bags[the_bag]:
+        counter += bag[0] * (1 + count_all_other_bags_inside(bag[1]))
     return counter
 
-print(yo_dawg('shiny gold'))
+print(count_all_other_bags_inside('shiny gold'))
