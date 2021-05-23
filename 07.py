@@ -20,11 +20,11 @@ def find_bags_which_can_contain():
         if bag not in bags_which_can_contain:
             for every_bag in containing_bags:
                 if every_bag[1] in bags_which_can_contain:
-                    bags_which_can_contain.append(bag)
+                    bags_which_can_contain.add(bag)
                     return find_bags_which_can_contain()
     return None
 
-bags_which_can_contain = ['shiny gold']
+bags_which_can_contain = {'shiny gold'}
 
 find_bags_which_can_contain()
 
